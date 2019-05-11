@@ -1,0 +1,16 @@
+<!--
+ - Created by Leonid Bartenev
+ -->
+
+<aura:component description="StudyParticipants">
+    <button class="slds-button slds-button_brand" onclick="{!c.doShowDialog}">Show Dialog</button>
+    <c:modal aura:id="testDialog" header="This is modal dialog">
+        Hello world!!!
+        <aura:set attribute="footer">
+            <div class="btn-footer">
+                <button class="slds-button slds-button_neutral">Cancel</button>
+                <button class="slds-button slds-button_brand">Save</button>
+            </div>
+        </aura:set>
+    </c:modal>
+</aura:component>
