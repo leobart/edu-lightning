@@ -2,15 +2,60 @@
  - Created by Leonid Bartenev
  -->
 
-<aura:component description="StudyParticipants">
-    <button class="slds-button slds-button_brand" onclick="{!c.doShowDialog}">Show Dialog</button>
-    <c:modal aura:id="testDialog" header="This is modal dialog">
-        Hello world!!!
-        <aura:set attribute="footer">
-            <div class="btn-footer">
-                <button class="slds-button slds-button_neutral">Cancel</button>
-                <button class="slds-button slds-button_brand">Save</button>
+<aura:component description="StudyParticipants" controller="ParticipantActionsRemote" implements="forceCommunity:availableForAllPageTypes, force:appHostable">
+    <!-- libs: -->
+    <ltng:require scripts="{!join(',', $Resource.LightningHelper_JS)}" afterScriptsLoaded="{!c.doGetParticipants}"/>
+
+    <!-- attributes: -->
+    <aura:attribute name="searchText" type="String"/>
+    <aura:attribute name="participants" type="Participant__c[]"/>
+
+    <!-- actions: -->
+    <c:Action_AddParticipant aura:id="actionAddParticipant"/>
+    <c:Action_DeleteParticipant aura:id="actionDeleteParticipant"/>
+
+    <!-- component body: -->
+    <div class="main-container">
+        <div class="title">Study Participants</div>
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size--1-of-1 slds-medium-size_3-of-12">
+                <lightning:button label="Add Participant" iconName="utility:add" variant="brand" class="add-participant-btn"
+                                  onclick="{!c.doAddParticipant}"/>
             </div>
-        </aura:set>
-    </c:modal>
+            <div class="slds-col slds-medium-size_9-of-12">
+                <lightning:input name="searchPartInput" label="" type="search" variant="label-hidden" value="{!v.searchText}"
+                                 placeholder="Search..." onchange="{!c.doGetParticipants}"/>
+            </div>
+        </div>
+
+        <div class="participants-container">
+            <c:Spinner aura:id="spinner" size="small"/>
+            <aura:if isTrue="{!!empty(v.participants)}">
+                <aura:iteration items="{!v.participants}" var="participant">
+                    <div class="slds-grid slds-wrap slds-gutters participant-row">
+                        <div class="slds-col slds-size--1-of-1 slds-large-size--1-of-5">
+                            {!participant.First_Name__c}
+                        </div>
+                        <div class="slds-col slds-size--1-of-1 slds-large-size--1-of-5">
+                            {!participant.Last_Name__c}
+                        </div>
+                        <div class="slds-col slds-size--1-of-1 slds-large-size--1-of-5">
+                            <ui:outputDate value="{!participant.DOB__c}"/>
+                        </div>
+                        <div class="slds-col slds-size--1-of-1 slds-large-size--1-of-5">
+                            {!participant.Email__c}
+                        </div>
+                        <div class="slds-col slds-size--1-of-1 slds-large-size--1-of-5">
+                            <button class="slds-button slds-button_neutral remove-btn" onclick="{!c.doDeleteParticipant}" data-participant-id="{!participant.Id}">
+                                <c:MySVG class="slds-button__icon slds-button__icon_left" ariaHidden="true"
+                                         xlinkHref="/_slds/icons/utility-sprite/svg/symbols.svg#close"/>
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </aura:iteration>
+            </aura:if>
+        </div>
+
+    </div>
 </aura:component>

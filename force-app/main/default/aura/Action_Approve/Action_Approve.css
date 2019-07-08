@@ -1,0 +1,12 @@
+/**
+ * Created by Leonid Bartenev
+ */
+
+.THIS .btn-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.THIS .message-container{
+    text-align: center;
+}

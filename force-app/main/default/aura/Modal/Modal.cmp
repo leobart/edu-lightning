@@ -8,6 +8,7 @@
     <aura:attribute name="header" type="String" />
     <aura:attribute name="footer" type="Aura.Component[]"/>
     <aura:attribute name="visible" type="boolean"/>
+    <aura:attribute name="cancelCallback" type="Object"/>
 
     <!-- methods: -->
     <aura:method name="show" action="{!c.doShow}" access="public"/>
@@ -15,7 +16,7 @@
     <aura:method name="cancel" action="{!c.doCancel}" access="public"/>
 
     <!-- component body: -->
-    <div style="height:640px">
+    <div>
         <section class="{!'slds-modal ' + if(v.visible, ' slds-fade-in-open', '')}" role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" >
             <div class="slds-modal__container">
                 <header class="slds-modal__header">

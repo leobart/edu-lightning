@@ -1,7 +1,38 @@
 /**
  * Created by Leonid Bartenev
  */
-.THIS .btn-footer{
-    display: flex;
-    justify-content: space-between;
+.THIS.main-container{
+    background-color: white;
+    min-height: 500px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.THIS .participant-row{
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #dedede;
+    margin: 10px 0;
+    align-items: center;
+    background-color: #fbfdff;
+}
+
+.THIS .add-participant-btn{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.THIS .remove-btn{
+    margin: 5px 0;
+    width: 100%;
+}
+
+.THIS .title{
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.THIS .participants-container{
+    position: relative;
+    min-height: 50px;
 }

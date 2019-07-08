@@ -1,0 +1,17 @@
+<!--
+ - Created by Leonid Bartenev
+ -->
+
+<aura:component description="Action_DeleteParticipant" controller="ParticipantActionsRemote">
+
+    <!-- methods: -->
+    <aura:method name="execute" action="{!c.doExecute}" access="public">
+        <aura:attribute name="participantId" type="String"/>
+        <aura:attribute name="callback" type="Function"/>
+        <aura:attribute name="cancelCallback" type="Function"/>
+    </aura:method>
+
+    <!-- actions: -->
+    <c:Action_Approve aura:id="approveAction"/>
+
+</aura:component>

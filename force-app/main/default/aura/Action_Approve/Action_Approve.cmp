@@ -1,0 +1,31 @@
+<!--
+ - Created by Leonid Bartenev
+ -->
+
+<aura:component description="Action_Approve">
+
+    <!-- attributes: -->
+    <aura:attribute name="title" type="String" access="private"/>
+    <aura:attribute name="message" type="String" access="private"/>
+    <aura:attribute name="callback" type="Object" access="private"/>
+
+    <!-- method: -->
+    <aura:method name="execute" action="{!c.doExecute}" access="public">
+        <aura:attribute name="title" type="String"/>
+        <aura:attribute name="message" type="String"/>
+        <aura:attribute name="callback" type="function"/>
+        <aura:attribute name="cancelCallback" type="function"/>
+    </aura:method>
+
+    <!-- component body: -->
+    <c:Modal aura:id="actionApproveModal" header="{!v.title}">
+        <div class="message-container">{!v.message}</div>
+        <aura:set attribute="footer">
+            <div class="btn-footer">
+                <lightning:button label="Ok" variant="brand" onclick="{!c.doOk}"/>
+                <lightning:button label="Cancel" onclick="{!c.doCancel}"/>
+            </div>
+        </aura:set>
+    </c:Modal>
+
+</aura:component>

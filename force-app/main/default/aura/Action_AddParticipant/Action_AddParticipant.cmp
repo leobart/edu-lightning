@@ -1,0 +1,45 @@
+<!--
+ - Created by Leonid Bartenev
+ -->
+
+<aura:component description="Action_AddParticipant" controller="ParticipantActionsRemote">
+
+    <!-- attributes: -->
+    <aura:attribute name="callback" type="Object" access="private"/>
+    <aura:attribute name="disabled" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="participant" type="Participant__c" access="private"/>
+    <aura:attribute name="visible" type="Boolean" access="private"/>
+    <aura:attribute name="todayDate" type="String" access="private"/>
+
+    <!-- methods: -->
+    <aura:method name="execute" action="{!c.doExecute}" access="public">
+        <aura:attribute name="callback" type="Function"/>
+    </aura:method>
+
+    <!-- component body: -->
+    <c:Modal aura:id="addParticipantModal" header="Add Participant" visible="{!v.visible}">
+        <aura:if isTrue="{!v.visible}">
+            <div class="slds-grid slds-wrap slds-gutters fields-container">
+                <div class="slds-col slds-size--1-of-1 slds-medium-size--1-of-2">
+                    <lightning:input aura:id="inputField" label="First Name" type="text" required="true" value="{!v.participant.First_Name__c}" onchange="{!c.doCheckFields}"/>
+                </div>
+                <div class="slds-col slds-size--1-of-1 slds-medium-size--1-of-2">
+                    <lightning:input aura:id="inputField" label="Last Name" type="text" required="true" value="{!v.participant.Last_Name__c}" onchange="{!c.doCheckFields}"/>
+                </div>
+                <div class="slds-col slds-size--1-of-1 slds-medium-size--1-of-2">
+                    <lightning:input aura:id="inputField" label="Date of birthday" type="date" required="true" value="{!v.participant.DOB__c}" onchange="{!c.doCheckFields}" max="{!v.todayDate}"/>
+                </div>
+                <div class="slds-col slds-size--1-of-1 slds-medium-size--1-of-2">
+                    <lightning:input aura:id="inputField" label="Email" type="email" required="true" value="{!v.participant.Email__c}" onchange="{!c.doCheckFields}"/>
+                </div>
+            </div>
+        </aura:if>
+        <aura:set attribute="footer">
+            <div class="btn-footer">
+                <lightning:button label="Add Participant" iconName="utility:add" variant="brand" onclick="{!c.doSave}" disabled="{!v.disabled}"/>
+                <lightning:button label="Cancel" onclick="{!c.doCancel}"/>
+            </div>
+        </aura:set>
+    </c:Modal>
+
+</aura:component>
